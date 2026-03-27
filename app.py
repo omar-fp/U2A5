@@ -47,13 +47,13 @@ def handle_api_error(e):
         return response
     return e
 
-@app.route('/forzar-error')
+@app.route('/error500')
 def forzar_error():
     try:
         resultado = 1 / 0
     except Exception as e:
-        app.logger.error(f"Error detectado: {e}")
-        return "El error ha sido capturado y registrado en el log.", 500
+        app.logger.error(f"Error 500: {e}")
+        abort(500)
 
 # --------------------------------------------------------------
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:hola123@localhost/juegos' # Nota para mi: Cambiar a esto si uso la laptop
@@ -135,4 +135,4 @@ def actualizar_juego():
 # --------------------------------------------------------------
 # Iniciar la app
 if __name__ == "__main__":
-    app.run(port=8000, debug=True)
+    app.run(port=8000, debug=False)
